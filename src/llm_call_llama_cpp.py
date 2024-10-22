@@ -68,13 +68,15 @@ def process_multiprompt(message_list,sampling_params):
     return [call_llm(message, sampling_params) for message in formats]
 
 
-prompts = [
+
+if __name__=="__main__":
+
+    prompts = [
     'Hello, my name is',
     'The president of the United States is',
     'The capital of France is',
     'The future of AI is'
-]
-if __name__=="__main__":
+    ]
     # print(post_to_llm(test_prompt, sampling_params={'temperature':1.0}).json())
     outputs = process_multiprompt(prompts,{'temperature':5, 'logprobs':True})
     for output in outputs:
