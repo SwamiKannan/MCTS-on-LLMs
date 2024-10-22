@@ -79,5 +79,3 @@ if __name__=="__main__":
     outputs = process_multiprompt(prompts,{'temperature':5, 'logprobs':True})
     for output in outputs:
         print(output[0])
-
-# curl --request POST --url http://localhost:8080/completion --header "Content-Type: application/json" --data '{"prompt": "Building a website can be done in 10 simple steps:","n_predict": 128}'
