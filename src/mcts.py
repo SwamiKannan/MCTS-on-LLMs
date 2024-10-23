@@ -45,3 +45,10 @@ class Node():
         selected_children = [child for child in self.children if child.score == max_visits]
         selected_child = selected_children[0] if len(selected_children)<2 else random.choice(selected_children)
         return selected_child
+        
+    def select_child_for_exploring(self):
+        max_score = max([child.score for child in self.children])
+        selected_children = [child for child in self.children if child.score == max_score]
+        selected_child = selected_children[0] if len(selected_children)<2 else random.choice(selected_children)
+        selected_child.total_visits +=1
+        return selected_child
