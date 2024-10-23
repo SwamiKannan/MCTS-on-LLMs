@@ -53,5 +53,5 @@ class Node():
         selected_child.total_visits +=1
         return selected_child
         
-class Node():
+class MCTS():
     pass
