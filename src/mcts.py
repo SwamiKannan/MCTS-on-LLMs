@@ -28,3 +28,7 @@ class Node():
         self.question = question
         self.answer = answer
         self.sampler = samplers[int(id.split('_')[-1])]
+        
+    def create_children(self, max_children):
+        for i in range(max_children-len(self.children)):
+            self.children.append(Node(str(self.id)+'_'+str(i+len(self.children)), question=self.question, answer=None, parent=self))
