@@ -60,3 +60,8 @@ class MCTS():
         self.max_children = max_children
         self.iterations = iterations
         self.create_root_node()
+        
+    def create_root_node(self):
+        self.root_node = Node(id ='1')
+        self.root_node.question = 'question'
+        self.root_node.answer = random.choice(self.seed_answers)
