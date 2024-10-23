@@ -54,4 +54,9 @@ class Node():
         return selected_child
         
 class MCTS():
-    pass
+    def __init__(self, question, seed_answers, max_children=3, iterations = 10):
+        self.question = question
+        self.seed_answers = seed_answers
+        self.max_children = max_children
+        self.iterations = iterations
+        self.create_root_node()
