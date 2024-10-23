@@ -32,3 +32,6 @@ class Node():
     def create_children(self, max_children):
         for i in range(max_children-len(self.children)):
             self.children.append(Node(str(self.id)+'_'+str(i+len(self.children)), question=self.question, answer=None, parent=self))
+
+    def ucb_score(self, exploration_constant = EXPLORATION_CONSTANT):
+        return (self.score/self.total_vists)+exploration_constant*(np.sqrt(np.log(self.parent.total_vists)/self.total_visits))
