@@ -39,3 +39,9 @@ class Node():
     def update_children_score(self):
         for child in self.children:
             child.score = self.ucb_score()
+            
+    def get_most_visited_child(self):
+        max_visits = max([child.total_visits for child in self.children])
+        selected_children = [child for child in self.children if child.score == max_visits]
+        selected_child = selected_children[0] if len(selected_children)<2 else random.choice(selected_children)
+        return selected_child
