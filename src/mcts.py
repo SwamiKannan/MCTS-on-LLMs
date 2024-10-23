@@ -65,3 +65,6 @@ class MCTS():
         self.root_node = Node(id ='1')
         self.root_node.question = 'question'
         self.root_node.answer = random.choice(self.seed_answers)
+        
+    def build_tree(self):
+        pass
