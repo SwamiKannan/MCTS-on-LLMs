@@ -35,3 +35,7 @@ class Node():
 
     def ucb_score(self, exploration_constant = EXPLORATION_CONSTANT):
         return (self.score/self.total_vists)+exploration_constant*(np.sqrt(np.log(self.parent.total_vists)/self.total_visits))
+        
+    def update_children_score(self):
+        for child in self.children:
+            child.score = self.ucb_score()
