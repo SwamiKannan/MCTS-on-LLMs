@@ -68,3 +68,11 @@ class MCTS():
         
     def build_tree(self):
         pass
+    
+    def run_tree_analysis(self):
+        for _ in self.iterations:
+            node = self.root_node
+            # create childrent that dont exist
+            # For each child, populate an answer
+            # score those answers
+            # backpropogate those answers
