@@ -52,3 +52,6 @@ class Node():
         selected_child = selected_children[0] if len(selected_children)<2 else random.choice(selected_children)
         selected_child.total_visits +=1
         return selected_child
+        
+class Node():
+    pass
