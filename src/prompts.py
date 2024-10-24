@@ -56,15 +56,13 @@ def rate_answer(question, answer):
         f'Question: {question}\n '
         f'Answer: {answer}\n\n '
         "Assess whether the user's question requires only the final answer or whether a justification is required "
-        'As an expert on this topic, please suggest a detailed critique of the answer, pointing out every flaw '
-        'Provide only a critique, not a suggested answer '
-        'Then, rate the answer on a scale of 0 to 100 '
-        'The response should be in the following format:\n ',
-        'Critique: <detailed critique>\n '
-        'Rating: <rating>'
+        'As an expert on this topic, please critique the answer, pointing out every flaw in the following format:\n '
+        'Critique: <detailed critique>'
+        '\nNext, rate the accuracy of the answer on a scale of 0 to 100 in the following format: '
+        'Rating: <rating of the accuracy of the answer>'
         )
-    
     response = process_single_prompt(prompt, {'temperature':1, 'max_tokens':1500})
+    print('Rater response:\n',response)
     try:
         match = re.search(r'Rating:\s*(\d+)', response)
         if match:
