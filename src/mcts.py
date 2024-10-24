@@ -51,8 +51,14 @@ class Node():
             self.context = self.question
         
     def create_children(self, max_children):
-        for i in range(max_children-len(self.children)):
-            self.children.append(Node(str(self.id)+'_'+str(i+len(self.children)), question=self.question, answer=None, parent=self))
+        for i in range(max_children):
+            child = Node(str(self.id)+'_'+str(i), question=self.question, answer=None, parent=self)
+            if self.parent:
+                child.answer = improve_answer(self.question, self.parent.answer, self.parent.critique)
+            else:
+                child.answer = improve_answer(self.question, child.answer,'')
+            child.critique= get_critique(self.question, child.answer)
+            self.children.append(child)
 
     def ucb_score(self, exploration_constant = EXPLORATION_CONSTANT):
         return (self.score/self.total_vists)+exploration_constant*(np.sqrt(np.log(self.parent.total_vists)/self.total_visits))
