@@ -26,16 +26,23 @@ samplers = [{'temperature':0.0, 'extra_body':extra_body}, {'temperature':0.8, 't
 class Node():
     def __init__(self, id, question, answer,parent=None):
         self.id = str(id)
-        self.level = parent.level + 1 if parent else 0
         self.parent = parent
         self.children = []
         self.total_visits = 0
         self.episilon = EPSILON_CONSTANT
-        self.score = float('inf')
-        self.response = None
+        self.score = 0
+        self.response = ''
         self.question = question
         self.answer = answer
-        self.sampler = samplers[int(id.split('_')[-1])]
+        try:
+            self.sampler = samplers[int(self.id.split('_')[-1])%len(samplers)] if '_' in id else samplers[int(self.id)]
+        except:
+            print('id:\t',self.id)
+            raise Exception('Sampler could not be sampled')
+        self.critique = ''
+        self.context = self.build_context()
+        self.status = None
+        self.ucb = 0
         
     def create_children(self, max_children):
         for i in range(max_children-len(self.children)):
