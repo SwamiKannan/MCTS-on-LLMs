@@ -12,8 +12,9 @@ from prompts import get_critique, improve_answer, rate_answer, get_answer_direct
 
 import random
 
-EXPLORATION_CONSTANT = np.sqrt(2)
-EPSILON_CONSTANT = 1e-5
+EXPLORATION_CONSTANT = math.sqrt(2) # Exploration constant for UCB
+EPSILON_CONSTANT = 1e-3 # If unvisited node, then the n_visits = 0 hence, node's UCB becomes infinite. This throttles it down
+MAX_SCORE = 0.95 #Even if the score is 1 i.e. 100%, set it as 0.95
 
 #define all possible samplers
 
