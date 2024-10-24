@@ -67,10 +67,10 @@ def process_multiprompt(message_list,sampling_params):
     formats = query_to_prompt(message_list)
     return [call_llm([message], sampling_params) for message in formats]
 
-def process_single_prompt(message, sampling_params):
+def process_single_prompt(message, sampling_params, system_prompt=''):
     prompt =  query_to_prompt([message])
-    prompt.insert(0,{'role':'system','content':'You are a smart logical thinker who solves problems by thinking through them step by step'})
-    print('Prompt:\t', prompt)
+    prompt.insert(0,{'role':'system','content':system_prompt})
+    # print('Prompt:\t', prompt)
     return call_llm(prompt,sampling_params)
 
 
