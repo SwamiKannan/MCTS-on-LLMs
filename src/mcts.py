@@ -74,9 +74,18 @@ class Node():
         return selected_child
         
     def select_child_for_exploring(self):
-        max_score = max([child.score for child in self.children])
-        selected_children = [child for child in self.children if child.score == max_score]
-        selected_child = selected_children[0] if len(selected_children)<2 else random.choice(selected_children)
+        if len(self.children) == 0:
+            raise Exception('No children available')
+        max_ucb = max([child.ucb for child in self.children])
+        selected_children = [child for child in self.children if child.score == max_ucb]
+        try:
+            selected_child = selected_children[0] if len(selected_children)<2 else random.choice(selected_children)
+        except:
+            print('Exception in selecting child')
+            print('Max UCB score:\t', max_ucb)
+            print('Scores:\t',[child.score for child in self.children])
+            raise Exception('Selected Child not found')
+
         selected_child.total_visits +=1
         return selected_child
         
