@@ -1,8 +1,15 @@
+# First commit to git
+# Need to relook at where the updated answer is being stored. Something is weird. Best nodes just keeo saying "I dont know" or the seed answers basically
+# Need to add system prompts for critique and rater
+# Add stop gap in case the answer is complete
+
 import os
 import json
-import numpy as np
-from local_dataloader import load_data
-from llama_call_hf import process_multilist
+import time
+import math
+from local_dataloader import load_data, parse_gsm8k
+from prompts import get_critique, improve_answer, rate_answer, get_answer_directly_from_llm, seed_answers
+
 import random
 
 EXPLORATION_CONSTANT = np.sqrt(2)
