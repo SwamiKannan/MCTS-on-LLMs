@@ -43,6 +43,12 @@ class Node():
         self.context = self.build_context()
         self.status = None
         self.ucb = 0
+    
+    def build_context(self):
+        if self.parent:
+            self.context = self.question + self.parent.answer + self.parent.critique 
+        else:
+            self.context = self.question
         
     def create_children(self, max_children):
         for i in range(max_children-len(self.children)):
