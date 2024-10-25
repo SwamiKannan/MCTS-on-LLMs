@@ -99,9 +99,8 @@ class MCTS():
         self.best_node = []
         
     def create_root_node(self):
-        self.root_node = Node(id ='1')
-        self.root_node.question = 'question'
-        self.root_node.answer = random.choice(self.seed_answers)
+        self.root_node = Node(id ='0', question=self.question, answer = random.choice(seed_answers))
+        self.root_node.total_visits = 1
         
     def build_tree(self):
         pass
