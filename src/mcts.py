@@ -145,3 +145,8 @@ class MCTS():
                     print()
             paths.append(steps_taken)
         return paths
+        
+    def search(self):
+        self.run_tree_analysis()
+        path = self.get_main_steps()
+        return path
