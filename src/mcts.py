@@ -127,3 +127,21 @@ class MCTS():
             self.update_tree_score(node, score)
             end_time  = time.time()
             print(f'Iteration {i+1} complete in {end_time - st_time :.2f} seconds')
+            
+    def get_main_steps(self):
+        paths = []
+        for node in self.best_node:
+            print('Best node:\t',node.id,'\tScore:\t',node.score)
+            path_id = node.id.split('_')
+            steps_taken = []
+            node = self.root_node
+            for id in path_id[1:]:  
+                steps_taken+=[{'answer':node.answer, 'critique':node.critique}]
+                try:
+                    node =node.children[int(id)]
+                except:
+                    print('Path issue:\n')
+                    print('ID:\t', id)
+                    print()
+            paths.append(steps_taken)
+        return paths
