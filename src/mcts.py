@@ -108,10 +108,22 @@ class MCTS():
             node.update_ucb()
             node = node.parent  
     
-    def run_tree_analysis(self):
-        for _ in self.iterations:
+    def run_tree_analysis(self, critique_reqd=True):
+        for i in range(self.iterations):
+            st_time = time.time()
             node = self.root_node
-            # create childrent that dont exist
-            # For each child, populate an answer
-            # score those answers
-            # backpropogate those answers
+            if len(node.children) < self.max_children:
+                node.create_children(self.max_children)
+            node = node.select_child_for_exploring()
+            score, critique = rate_answer(self.question,node.answer)
+            node.score=  score
+            if score > self.max_score:
+                self.max_score = score
+                self.best_node = [node]
+            if score == self.max_score:
+                self.best_node.append(node)
+            if critique_reqd:
+                print('Critique:\n',critique)
+            self.update_tree_score(node, score)
+            end_time  = time.time()
+            print(f'Iteration {i+1} complete in {end_time - st_time :.2f} seconds')
