@@ -102,8 +102,11 @@ class MCTS():
         self.root_node = Node(id ='0', question=self.question, answer = random.choice(seed_answers))
         self.root_node.total_visits = 1
         
-    def build_tree(self):
-        pass
+    def update_tree_score(self,node, score):
+        while node.parent:
+            node.score += score
+            node.update_ucb()
+            node = node.parent  
     
     def run_tree_analysis(self):
         for _ in self.iterations:
