@@ -150,3 +150,21 @@ class MCTS():
         self.run_tree_analysis()
         path = self.get_main_steps()
         return path
+        
+if __name__ == "__main__":
+    dataset = parse_gsm8k()
+    q = dataset[1]['question']
+    fa = dataset[1]['final_answer']
+    mcts = MCTS(question=q, seed_answers=seed_answers)
+    path_ex = mcts.search()
+    print(path_ex)
+    for p in path_ex:
+        print
+    with open('path_example.txt') as f:
+        f.write(str(path_ex))
+
+
+            # create childrent that dont exist
+            # For each child, populate an answer
+            # score those answers
+            # backpropogate those answers
